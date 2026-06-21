@@ -59,6 +59,7 @@ jobs:
       if: steps.should_build.outputs.should_build
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
         TAG: ${{ steps.version_info.outputs.latest_tag }}
         NOTES: ${{ steps.version_info.outputs.version_info }}
       run: |
@@ -132,6 +133,7 @@ jobs:
       - name: Upload release asset
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
           TAG: ${{ needs.check-version.outputs.latest_tag }}
         working-directory: aseprite/build/bin
         run: |
